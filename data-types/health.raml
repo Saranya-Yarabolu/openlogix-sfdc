@@ -1,0 +1,12 @@
+#%RAML 1.0 DataType
+properties: 
+  status:
+    type: string
+    enum:
+      - success
+      - fail
+    example: "success"
+  timeStamp:
+    type: datetime-only
+    example: "2023-10-03T12:10:00"
+    

@@ -1,0 +1,80 @@
+#%RAML 1.0
+title: Salesforce System API
+description: This is a system API used to get the organization details from salesforce
+protocols: [HTTP, HTTPS]
+mediaType: application/json
+version: v1
+baseUri: https://{env}.openlogix.com/{version}
+baseUriParameters: 
+  env: 
+    enum:
+      - devapi
+      - qaapi
+      - api
+
+types:
+  Health: !include data-types/health.raml
+  Org: !include data-types/org.raml
+  OrgInsert: !include data-types/org-insert.raml
+
+traits:
+  ErrorResponse: !include traits/error-response.raml
+  ClientRequired: !include traits/client-is-required.raml
+
+/health:
+  description: Used to check the health status of the API.
+  get:
+    displayName: Health Status
+    responses:
+      200:
+        body:
+          type: Health
+
+/orgs:
+  is:
+    - ErrorResponse
+    - ClientRequired
+  get:
+    description: Used to retrieve the org details from salesforce
+    responses: 
+      200:
+        body:
+          application/json:
+            type: Org[]
+  post:
+    description: Used to create/insert new org details to the salesforce
+    body: 
+      type: OrgInsert[]
+    responses: 
+      201:
+        body:
+          application/json:
+            example:
+              {
+                "status": "Created Successfully"
+              }
+
+  /{id}:
+    put:
+      description: Used to update the org details in the salesforce
+      body: 
+        type: OrgInsert
+      responses: 
+        200:
+          body:
+            application/json:
+              example:
+                {
+                  "status": "Updated Successfully"
+                }
+    delete:
+      description: Used to delete the org details in the salesforce
+      responses:
+        204:
+          body:
+            application/json:
+              example:
+                {
+                  "status": "Deleted Successfully"
+                }
+                                

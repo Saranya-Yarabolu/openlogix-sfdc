@@ -1,0 +1,35 @@
+#%RAML 1.0 DataType
+properties: 
+  id:
+    type: string
+    example: "12W3D"
+  name:
+    type: string
+    example: "Saranya Org"
+  email:
+    type: string
+    example: "something@sorg.com"
+  phone?:
+    type: string
+    example: "9807654321"
+  revenue?:
+    type: number
+    minimum: 0
+    example: 99998
+  street?:
+    type: string
+    example: "345 Nowhere St"
+  city?:
+    type: string
+    example: "Bloomfield"
+  zipcode?:
+    type: number
+    minimum: 0
+    example: 87654
+  country?:
+    type: string
+    example: "USA"
+  createdBy?:
+    type: string
+    example: "someone"
+
